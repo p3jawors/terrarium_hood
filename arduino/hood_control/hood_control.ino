@@ -1,10 +1,18 @@
 // Relays are active low (set pins to low to turn relay on)
-
 #include <Wire.h>
 #include "RTClib.h"
 #include "relay.h"
 #include "constants.h"
 #include "sun.h"
+#include <LiquidCrystal.h>
+
+// print to serial port
+//#define debugprint Serial.print
+//#define debugprintln Serial.println
+// turn of printing
+#define debugprint //
+#define debugprintln //
+
 RTC_DS1307 RTC;
 //DateTime now = RTC.now();
 
@@ -16,20 +24,22 @@ void print_time();
 //============ SETUP ================
 void setup() {
   Serial.begin(57600);
+  lcd.clear;
+  lcd.begin(20,4);
   //setup pins
   pin_setup();
-  Serial.println("Pins setup");
+  debugprintln("Pins setup");
   //set up RTC
   rtc_setup();
-  Serial.println("RTC setup");
+  debugprintln("RTC setup");
 }
 
 //=========== MAIN LOOP ==============
 void loop() {
   DateTime now = RTC.now();
   if (now.day() != sun->today){
-    Serial.println("Enjoy the new day!");
-    Serial.print("It is now ");
+    debugprintln("Enjoy the new day!");
+    debugprint("It is now ");
     print_time();
     
     sun->day_of_year = days_in_month[now.month()-1] + now.day();
@@ -38,10 +48,10 @@ void loop() {
     sun->today = now.day();
     morning_misted = false;
     evening_misted = false;
-    Serial.print("Today's sunrise time: ");
-    Serial.println(sun->rise);
-    Serial.print("Today's sunset time: ");
-    Serial.println(sun->set);
+    debugprint("Today's sunrise time: ");
+    debugprintln(sun->rise);
+    debugprint("Today's sunset time: ");
+    debugprintln(sun->set);
   }
   
   //-------------check switch state
@@ -59,7 +69,7 @@ void rtc_setup(){
   DateTime now = RTC.now();
   
   if (! RTC.isrunning()) {
-    Serial.println("RTC is NOT running!");
+    debugprintln("RTC is NOT running!");
     // following line sets the RTC to the date & time this sketch was compiled
     RTC.adjust(DateTime(__DATE__, __TIME__));
   }
@@ -70,49 +80,49 @@ void rtc_setup(){
   sun->set = A[1]*sin(B*(sun->day_of_year - C[1]))+D[1];
   sun->today = now.day();
   
-  Serial.print("Today's sunrise time: ");
-  Serial.print(floor(sun->rise/60));
-  Serial.print(":");
-  Serial.println(sun->rise%60);
+  debugprint("Today's sunrise time: ");
+  debugprint(floor(sun->rise/60));
+  debugprint(":");
+  debugprintln(sun->rise%60);
   
-  Serial.print("Today's sunset time: ");
-  Serial.print(floor(sun->set/60));
-  Serial.print(":");
-  Serial.println(sun->set%60);
+  debugprint("Today's sunset time: ");
+  debugprint(floor(sun->set/60));
+  debugprint(":");
+  debugprintln(sun->set%60);
 }
 
 void print_time(){
   DateTime now = RTC.now();
-  Serial.print(now.year(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.day(), DEC);
-  Serial.print(' ');
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  //Serial.println("--------------------------------------");
+  debugprint(now.year(), DEC);
+  debugprint('/');
+  debugprint(now.month(), DEC);
+  debugprint('/');
+  debugprint(now.day(), DEC);
+  debugprint(' ');
+  debugprint(now.hour(), DEC);
+  debugprint(':');
+  debugprint(now.minute(), DEC);
+  debugprint(':');
+  debugprint(now.second(), DEC);
+  //debugprintln("--------------------------------------");
 }
 
 void auto_mode(int relay_ID, int relay_pin) {
   DateTime now = RTC.now();
   sun->current_minutes = now.hour() * 60 + now.minute();
-  Serial.print("Current minute of the day: ");
-  Serial.println(sun->current_minutes);
+  debugprint("Current minute of the day: ");
+  debugprintln(sun->current_minutes);
 
   // Check which relay is being switched
   switch (relay_ID){
     // ---------WATERFALL AUTO MODE---------
     case 0:
-      Serial.println("WATERFALL AUTO CASE ACTIVATED");
+      debugprintln("WATERFALL AUTO CASE ACTIVATED");
       break;
       
     // ------------UV AUTO MODE-------------
     case 1:
-      Serial.println("UV AUTO CASE ACTIVATED");
+      debugprintln("UV AUTO CASE ACTIVATED");
       if (sun->current_minutes > sun->rise && sun->current_minutes < sun->set){
         digitalWrite(relay_pin, LOW); //active low relays
       }
@@ -123,7 +133,7 @@ void auto_mode(int relay_ID, int relay_pin) {
       
     // -----------MIST AUTO MODE------------
     case 2:
-      Serial.println("MIST AUTO CASE ACTIVATED");
+      debugprintln("MIST AUTO CASE ACTIVATED");
       if (sun->current_minutes > sun->rise && morning_misted == false) {   //morning misting
         digitalWrite(relay_pin, LOW); //active low relays
         delay(mist_length);
@@ -141,7 +151,7 @@ void auto_mode(int relay_ID, int relay_pin) {
 
     // ---default if no other case matches---
     default:
-      Serial.println("ERROR: AUTO MODE - NO CASE MATCH");
+      debugprintln("ERROR: AUTO MODE - NO CASE MATCH");
       digitalWrite(relay_pin, HIGH);
       break;
   }

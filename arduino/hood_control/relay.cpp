@@ -51,8 +51,8 @@ void switch_state(int relay_ID) {
 
   // check if switch state has changed
   if (r->switch_case != _switch_cases[relay_ID]) {
-    Serial.print(switch_status[r->switch_case]);
-    Serial.println(switch_label[relay_ID]);
+    debugprint(switch_status[r->switch_case]);
+    debugprintln(switch_label[relay_ID]);
     _switch_cases[relay_ID] = r->switch_case;
   }
 }
