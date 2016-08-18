@@ -1,0 +1,443 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:shield_arduino
+LIBS:Relays
+LIBS:skittles_tank_hood-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ARDUINO_NANO SH?
+U 1 1 5738B7C6
+P 4505 4130
+F 0 "SH?" H 4480 3055 60  0000 C CNN
+F 1 "ARDUINO_NANO" H 4480 5180 60  0000 C CNN
+F 2 "" H 3580 3530 60  0000 C CNN
+F 3 "" H 3580 3530 60  0000 C CNN
+	1    4505 4130
+	1    0    0    -1  
+$EndComp
+$Comp
+L sainsmart_4_relay_board U?
+U 1 1 5738BB61
+P 6565 4135
+F 0 "U?" H 6565 5085 60  0000 C CNN
+F 1 "sainsmart_4_relay_board" H 6565 4935 60  0000 C CNN
+F 2 "" H 6965 4235 60  0000 C CNN
+F 3 "" H 6965 4235 60  0000 C CNN
+	1    6565 4135
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X03 Outlet
+U 1 1 5738C4D5
+P 6525 2325
+F 0 "Outlet" H 6525 2525 50  0000 C CNN
+F 1 "120VAC" V 6625 2325 50  0000 C CNN
+F 2 "" H 6525 2325 50  0000 C CNN
+F 3 "" H 6525 2325 50  0000 C CNN
+	1    6525 2325
+	-1   0    0    1   
+$EndComp
+$Comp
+L Switch_SPDT_x2 SW1
+U 1 1 5738C69D
+P 2590 3515
+F 0 "SW1" H 2390 3665 50  0000 C CNN
+F 1 "Mister" H 2340 3365 50  0000 C CNN
+F 2 "" H 2590 3515 50  0000 C CNN
+F 3 "" H 2590 3515 50  0000 C CNN
+	1    2590 3515
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch_SPDT_x2 SW2
+U 1 1 5738C7E0
+P 2585 4130
+F 0 "SW2" H 2385 4280 50  0000 C CNN
+F 1 "Waterfall" H 2335 3980 50  0000 C CNN
+F 2 "" H 2585 4130 50  0000 C CNN
+F 3 "" H 2585 4130 50  0000 C CNN
+	1    2585 4130
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch_SPDT_x2 SW3
+U 1 1 5738C849
+P 2585 4755
+F 0 "SW3" H 2385 4905 50  0000 C CNN
+F 1 "Light" H 2335 4605 50  0000 C CNN
+F 2 "" H 2585 4755 50  0000 C CNN
+F 3 "" H 2585 4755 50  0000 C CNN
+	1    2585 4755
+	1    0    0    -1  
+$EndComp
+Text GLabel 5155 3655 2    60   Output ~ 0
+5VDC
+Text GLabel 2290 3515 0    60   Input ~ 0
+5VDC
+Text GLabel 2285 4130 0    60   Input ~ 0
+5VDC
+Text GLabel 2285 4755 0    60   Input ~ 0
+5VDC
+Text GLabel 5915 4485 0    60   Input ~ 0
+5VDC
+Text GLabel 7810 2225 2    60   Output ~ 0
+N
+Text GLabel 7810 2325 2    60   Output ~ 0
+E
+Text GLabel 7810 2425 2    60   Output ~ 0
+L
+Text GLabel 7215 3635 2    60   Input ~ 0
+L
+Text GLabel 7215 3985 2    60   Input ~ 0
+L
+Text GLabel 7215 4335 2    60   Input ~ 0
+L
+NoConn ~ 7215 4585
+NoConn ~ 7215 4685
+NoConn ~ 7215 4785
+NoConn ~ 5915 4385
+NoConn ~ 5915 4685
+NoConn ~ 5915 4785
+NoConn ~ 7215 3535
+NoConn ~ 7215 3885
+NoConn ~ 7215 4235
+$Comp
+L CONN_01X03 CON2
+U 1 1 574073BF
+P 10030 3095
+F 0 "CON2" H 9995 3310 50  0000 C CNN
+F 1 "Waterfall Pump" V 10130 3095 50  0000 C CNN
+F 2 "" H 10030 3095 50  0000 C CNN
+F 3 "" H 10030 3095 50  0000 C CNN
+	1    10030 3095
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X03 CON3
+U 1 1 5740747D
+P 10020 3830
+F 0 "CON3" H 10000 4040 50  0000 C CNN
+F 1 "Mist Pump" V 10120 3830 50  0000 C CNN
+F 2 "" H 10020 3830 50  0000 C CNN
+F 3 "" H 10020 3830 50  0000 C CNN
+	1    10020 3830
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X03 CON4
+U 1 1 57407500
+P 10010 4550
+F 0 "CON4" H 9985 4765 50  0000 C CNN
+F 1 "UV Light" V 10110 4550 50  0000 C CNN
+F 2 "" H 10010 4550 50  0000 C CNN
+F 3 "" H 10010 4550 50  0000 C CNN
+	1    10010 4550
+	1    0    0    -1  
+$EndComp
+Text GLabel 9830 2995 0    60   Input ~ 0
+N
+Text GLabel 9820 3730 0    60   Input ~ 0
+N
+Text GLabel 9810 4450 0    60   Input ~ 0
+N
+Text GLabel 9830 3095 0    60   Input ~ 0
+E
+Text GLabel 9820 3830 0    60   Input ~ 0
+E
+Text GLabel 9810 4550 0    60   Input ~ 0
+E
+$Comp
+L CONN_01X03 CON5
+U 1 1 574083E8
+P 4545 2480
+F 0 "CON5" H 4485 2680 50  0000 C CNN
+F 1 "Arduino USB" V 4645 2480 50  0000 C CNN
+F 2 "" H 4545 2480 50  0000 C CNN
+F 3 "" H 4545 2480 50  0000 C CNN
+	1    4545 2480
+	0    1    1    0   
+$EndComp
+Text GLabel 4645 2280 1    60   Input ~ 0
+N
+Text GLabel 4545 2280 1    60   Input ~ 0
+E
+Text GLabel 4445 2280 1    60   Input ~ 0
+L
+$Comp
+L CONN_02X03 P1
+U 1 1 57409248
+P 7560 2325
+F 0 "P1" H 7560 2525 50  0000 C CNN
+F 1 "840J Surge Protector" H 7560 2125 50  0000 C CNN
+F 2 "" H 7560 1125 50  0000 C CNN
+F 3 "" H 7560 1125 50  0000 C CNN
+	1    7560 2325
+	1    0    0    -1  
+$EndComp
+Text GLabel 3855 3655 0    60   Output ~ 0
+GND
+Text GLabel 5915 3985 0    60   Input ~ 0
+GND
+Text GLabel 3280 3830 2    60   Input ~ 0
+GND
+Text GLabel 3275 4445 2    60   Input ~ 0
+GND
+Text GLabel 3285 5075 2    60   Input ~ 0
+GND
+Text GLabel 3330 3230 2    60   Input ~ 0
+GND
+$Comp
+L R R?
+U 1 1 57430DB2
+P 3090 3230
+F 0 "R?" V 3170 3230 50  0000 C CNN
+F 1 "220" V 3090 3230 50  0000 C CNN
+F 2 "" V 3020 3230 50  0000 C CNN
+F 3 "" H 3090 3230 50  0000 C CNN
+	1    3090 3230
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 574311F3
+P 3085 3710
+F 0 "R?" V 3165 3710 50  0000 C CNN
+F 1 "220" V 3085 3710 50  0000 C CNN
+F 2 "" V 3015 3710 50  0000 C CNN
+F 3 "" H 3085 3710 50  0000 C CNN
+	1    3085 3710
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 5743125C
+P 3090 3920
+F 0 "R?" V 3170 3920 50  0000 C CNN
+F 1 "220" V 3090 3920 50  0000 C CNN
+F 2 "" V 3020 3920 50  0000 C CNN
+F 3 "" H 3090 3920 50  0000 C CNN
+	1    3090 3920
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 574312BC
+P 3080 4305
+F 0 "R?" V 3160 4305 50  0000 C CNN
+F 1 "220" V 3080 4305 50  0000 C CNN
+F 2 "" V 3010 4305 50  0000 C CNN
+F 3 "" H 3080 4305 50  0000 C CNN
+	1    3080 4305
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 5743132F
+P 3080 4540
+F 0 "R?" V 3160 4540 50  0000 C CNN
+F 1 "220" V 3080 4540 50  0000 C CNN
+F 2 "" V 3010 4540 50  0000 C CNN
+F 3 "" H 3080 4540 50  0000 C CNN
+	1    3080 4540
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 57431399
+P 3070 5075
+F 0 "R?" V 3150 5075 50  0000 C CNN
+F 1 "220" V 3070 5075 50  0000 C CNN
+F 2 "" V 3000 5075 50  0000 C CNN
+F 3 "" H 3070 5075 50  0000 C CNN
+	1    3070 5075
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2890 3415 3595 3415
+Wire Wire Line
+	3595 3415 3595 3780
+Wire Wire Line
+	3595 3780 3855 3780
+Wire Wire Line
+	2890 3615 3555 3615
+Wire Wire Line
+	3555 3615 3555 3905
+Wire Wire Line
+	3555 3905 3855 3905
+Wire Wire Line
+	2885 4030 3855 4030
+Wire Wire Line
+	2885 4230 3555 4230
+Wire Wire Line
+	3555 4230 3555 4155
+Wire Wire Line
+	3555 4155 3855 4155
+Wire Wire Line
+	2885 4655 3555 4655
+Wire Wire Line
+	3555 4655 3555 4280
+Wire Wire Line
+	3555 4280 3855 4280
+Wire Wire Line
+	2885 4855 3660 4855
+Wire Wire Line
+	3660 4855 3660 4405
+Wire Wire Line
+	3660 4405 3855 4405
+Wire Wire Line
+	3855 4780 3810 4780
+Wire Wire Line
+	3810 4780 3810 5335
+Wire Wire Line
+	3810 5335 5370 5335
+Wire Wire Line
+	5370 5335 5370 4085
+Wire Wire Line
+	5370 4085 5915 4085
+Wire Wire Line
+	3765 4655 3855 4655
+Wire Wire Line
+	3765 4655 3765 5375
+Wire Wire Line
+	3765 5375 5410 5375
+Wire Wire Line
+	5410 5375 5410 4185
+Wire Wire Line
+	5410 4185 5915 4185
+Wire Wire Line
+	3855 4530 3720 4530
+Wire Wire Line
+	3720 4530 3720 5420
+Wire Wire Line
+	3720 5420 5455 5420
+Wire Wire Line
+	5455 5420 5455 4285
+Wire Wire Line
+	5455 4285 5915 4285
+Wire Wire Line
+	7215 3735 8545 3735
+Wire Wire Line
+	8545 3735 8545 3195
+Wire Wire Line
+	8545 3195 9830 3195
+Wire Wire Line
+	7215 4085 8870 4085
+Wire Wire Line
+	8870 4085 8870 3930
+Wire Wire Line
+	8870 3930 9820 3930
+Wire Wire Line
+	7215 4435 8865 4435
+Wire Wire Line
+	8865 4435 8865 4650
+Wire Wire Line
+	8865 4650 9810 4650
+Wire Wire Line
+	6725 2225 7310 2225
+Wire Wire Line
+	6725 2325 7310 2325
+Wire Wire Line
+	7310 2425 6725 2425
+Wire Wire Line
+	2940 3230 2890 3230
+Wire Wire Line
+	2890 3230 2890 3415
+Wire Wire Line
+	3240 3230 3330 3230
+Wire Wire Line
+	2935 3710 2890 3710
+Wire Wire Line
+	2890 3710 2890 3615
+Wire Wire Line
+	3235 3710 3280 3710
+Wire Wire Line
+	3280 3710 3280 3920
+Wire Wire Line
+	3280 3920 3240 3920
+Wire Wire Line
+	2940 3920 2885 3920
+Wire Wire Line
+	2885 3920 2885 4030
+Wire Wire Line
+	2930 4305 2885 4305
+Wire Wire Line
+	2885 4305 2885 4230
+Wire Wire Line
+	3230 4305 3275 4305
+Wire Wire Line
+	3275 4305 3275 4540
+Wire Wire Line
+	3275 4540 3230 4540
+Wire Wire Line
+	2930 4540 2885 4540
+Wire Wire Line
+	2885 4540 2885 4655
+Wire Wire Line
+	3220 5075 3285 5075
+Wire Wire Line
+	2920 5075 2885 5075
+Wire Wire Line
+	2885 5075 2885 4855
+NoConn ~ 3855 3280
+NoConn ~ 3855 3405
+NoConn ~ 3855 3530
+NoConn ~ 3855 4905
+NoConn ~ 3855 5030
+NoConn ~ 5155 3280
+NoConn ~ 5155 3405
+NoConn ~ 5155 3530
+NoConn ~ 5155 3780
+NoConn ~ 5155 3905
+NoConn ~ 5155 4030
+NoConn ~ 5155 4155
+NoConn ~ 5155 4280
+NoConn ~ 5155 4405
+NoConn ~ 5155 4530
+NoConn ~ 5155 4655
+NoConn ~ 5155 4780
+NoConn ~ 5155 4905
+NoConn ~ 5155 5030
+Text Notes 1500 2905 0    60   ~ 0
+Add red LEDs after pull down resistor to have status LEDs
+$EndSCHEMATC
