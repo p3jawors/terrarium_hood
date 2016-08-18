@@ -36,6 +36,8 @@ void loop() {
     sun->rise = A[0]*sin(B*(sun->day_of_year - C[0]))+D[0];
     sun->set = A[1]*sin(B*(sun->day_of_year - C[1]))+D[1];
     sun->today = now.day();
+    morning_misted = false;
+    evening_misted = false;
   }
   
   //-------------check switch state
@@ -62,6 +64,10 @@ void rtc_setup(){
   sun->day_of_year = days_in_month[now.month()-1] + now.day();
   sun->rise = A[0]*sin(B*(sun->day_of_year - C[0]))+D[0];
   sun->set = A[1]*sin(B*(sun->day_of_year - C[1]))+D[1];
+  Serial.print("Today's sunrise time: ");
+  Serial.println(sun->rise);
+  Serial.print("Today's sunset time: ");
+  Serial.println(sun->set);
   sun->today = now.day();
 }
 
@@ -89,12 +95,12 @@ void auto_mode(int relay_ID, int relay_pin) {
 
   // Check which relay is being switched
   switch (relay_ID){
-    // ---WATERFALL AUTO MODE---
+    // ---------WATERFALL AUTO MODE---------
     case 0:
       Serial.println("WATERFALL AUTO CASE ACTIVATED");
       break;
       
-    // ---UV AUTO MODE---
+    // ------------UV AUTO MODE-------------
     case 1:
       Serial.println("UV AUTO CASE ACTIVATED");
       if (sun->current_minutes > sun->rise && sun->current_minutes < sun->set){
@@ -105,14 +111,28 @@ void auto_mode(int relay_ID, int relay_pin) {
       }
       break;
       
-    // ---MIST AUTO MODE---
+    // -----------MIST AUTO MODE------------
     case 2:
       Serial.println("MIST AUTO CASE ACTIVATED");
+      if (sun->current_minutes > sun->rise && morning_misted == false) {   //morning misting
+        digitalWrite(relay_pin, LOW); //active low relays
+        delay(mist_length);
+        digitalWrite(relay_pin, HIGH);
+        morning_misted = true;
+      }
+      else if (sun->current_minutes > sun->set && evening_misted == false) { //evening misting
+        digitalWrite(relay_pin, LOW); //active low relays
+        delay(mist_length);
+        digitalWrite(relay_pin, HIGH);
+        evening_misted = true;
+      }
+      // boolean misted gets reset at start of new day in main loop
       break;
 
     // ---default if no other case matches---
     default:
       Serial.println("ERROR: AUTO MODE - NO CASE MATCH");
+      digitalWrite(relay_pin, HIGH);
       break;
   }
 }
