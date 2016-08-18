@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 # sunrise and set times in minutes from midnight
 late_sun = [7*60 + 35, 21*60 + 7]
 early_sun= [5*60 + 41, 16*60 + 46]
-sunrise = np.zeros(365)
-sunset = np.zeros(365)
+#sunrise = np.zeros(365)
+#sunset = np.zeros(365)
 
 # y range for sin approximation
 sun_range = [math.floor((late_sun[0] - early_sun[0]) / 2.0), math.floor((late_sun[1] - early_sun[1]) / 2.0)]
@@ -15,20 +15,31 @@ sun_range = [math.floor((late_sun[0] - early_sun[0]) / 2.0), math.floor((late_su
 # sin constants
 A = [sun_range[0], sun_range[1]]    # amplitude
 B =  2.0*math.pi / 365.0            # period
-#x = 355                             # CURRENT DAY
-x = np.linspace(1,365,365)
+x = 231                             # CURRENT DAY
+#x = np.linspace(1,365,365)
 C = [264, 81]                       # day offset
 D = [early_sun[0], early_sun[1]]    # time offset
 
+"""
 for ii in range(0,365):
     sunrise[ii] = A[0]*math.sin(B*(x[ii] - C[0]))+D[0]
     sunset[ii] = A[1]*math.sin(B*(x[ii] - C[1]))+D[1]
     #print ii
+    """
+sunrise = A[0]*math.sin(B*(x - C[0]))+D[0]
+sunset = A[1]*math.sin(B*(x - C[1]))+D[1]
 
-#print math.floor(sunrise/60)
-#print ':'
-#print sunrise % 60
+print "sunrise"
+print math.floor(sunrise/60)
+print ':'
+print sunrise % 60
 #print sunrise
+
+print "sunset"
+print math.floor(sunset/60)
+print ':'
+print sunset % 60
+#print sunset
 
 """
 plt.plot(x, sunrise, lw=2, label = 'Sunrise', color = 'green') # lw sets line width

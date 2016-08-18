@@ -38,6 +38,10 @@ void loop() {
     sun->today = now.day();
     morning_misted = false;
     evening_misted = false;
+    Serial.print("Today's sunrise time: ");
+    Serial.println(sun->rise);
+    Serial.print("Today's sunset time: ");
+    Serial.println(sun->set);
   }
   
   //-------------check switch state
@@ -64,11 +68,17 @@ void rtc_setup(){
   sun->day_of_year = days_in_month[now.month()-1] + now.day();
   sun->rise = A[0]*sin(B*(sun->day_of_year - C[0]))+D[0];
   sun->set = A[1]*sin(B*(sun->day_of_year - C[1]))+D[1];
-  Serial.print("Today's sunrise time: ");
-  Serial.println(sun->rise);
-  Serial.print("Today's sunset time: ");
-  Serial.println(sun->set);
   sun->today = now.day();
+  
+  Serial.print("Today's sunrise time: ");
+  Serial.print(floor(sun->rise/60));
+  Serial.print(":");
+  Serial.println(sun->rise%60);
+  
+  Serial.print("Today's sunset time: ");
+  Serial.print(floor(sun->set/60));
+  Serial.print(":");
+  Serial.println(sun->set%60);
 }
 
 void print_time(){
