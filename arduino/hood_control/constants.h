@@ -24,17 +24,20 @@ static const float B =  2.0*3.14159 / 365.0;                                    
 static const float C[] = {264, 81};                                                                               // day offset
 static const float D[] = {early_sun[0], early_sun[1]};                                                            // time offset
 
-// Relay constants
+// Relay and pin constants
 static const int _auto_pins[] = {2,4,6};
 static const int _manual_pins[] = {3,5,7};
 static const int _relay_pins[] = {8,9,10};
 static volatile int _switch_cases[] = {2,2,2}; //0 auto, 1 manual, 2 off, 3 error
-static const char* switch_status[] = {"AUTO ON RELAY ","MANUAL ON RELAY ","OFF RELAY ","ERROR: RELAY SWITCH NOT READ"};
+static const char* switch_status[] = {"AUTO ON","MANUAL ON","OFF","ERROR: RELAY SWITCH NOT READ"};
 static const char* switch_label[] = {"Waterfall","UV Light","Mist"};
+static const int lcd_mode = 13;
 
 // Other constants
 static const int mist_length = 15; //in seconds
 static volatile bool morning_misted = false;
 static volatile bool evening_misted = false;
+static volatile int lcd_switch = 0;
+static volatile int switch_case_sum = 0; //sum cases for lcd printing to know to refresh screen if switch has been changed
 
 #endif

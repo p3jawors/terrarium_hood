@@ -5,26 +5,28 @@
 #include "constants.h"
 #include "sun.h"
 #include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, A0, A1, A2, A3);
 
 // print to serial port
-//#define debugprint Serial.print
-//#define debugprintln Serial.println
+#define debugprint Serial.print
+#define debugprintln Serial.println
 // turn of printing
-#define debugprint //
-#define debugprintln //
+//#define debugprint //
+//#define debugprintln //
 
 RTC_DS1307 RTC;
 //DateTime now = RTC.now();
 
 void rtc_setup();
 void print_time();
+void lcd_print();
 
 //void auto_mode(int relay_ID, int relay_pin);
 
 //============ SETUP ================
 void setup() {
   Serial.begin(57600);
-  lcd.clear;
+  lcd.clear();
   lcd.begin(20,4);
   //setup pins
   pin_setup();
@@ -58,10 +60,12 @@ void loop() {
   for (int ii=0; ii<3; ii++){
     switch_state(ii);
   }
-  delay(50); // delay for switch debouncing
+  
+  lcd_print();
+  delay(50); // delay for switch debouncing and to see lcd
 }
 
-//=========== Functions ===============
+//================================ Functions ==========================================
 void rtc_setup(){
   // Set RTC
   Wire.begin();
@@ -154,5 +158,67 @@ void auto_mode(int relay_ID, int relay_pin) {
       debugprintln("ERROR: AUTO MODE - NO CASE MATCH");
       digitalWrite(relay_pin, HIGH);
       break;
+  }
+}
+
+void lcd_print() {
+  DateTime now = RTC.now();
+  if(digitalRead(lcd_mode) == LOW){ // print default screen
+    if(lcd_switch == 1){
+      lcd.clear();
+      lcd_switch = 0;
+    }
+    lcd.setCursor(0,0);
+    lcd.print("Property of Skittles");
+
+    // Date and Time
+    lcd.setCursor(0,1);
+    lcd.print(now.year(), DEC);
+    lcd.print('/');
+    lcd.print(now.month(), DEC);
+    lcd.print('/');
+    lcd.print(now.day(), DEC);
+    lcd.print(' ');
+    lcd.print(now.hour(), DEC);
+    lcd.print(':');
+    lcd.print(now.minute(), DEC);
+    lcd.print(':');
+    lcd.print(now.second(), DEC);
+
+    // Sunrise time
+    lcd.setCursor(0,2);
+    lcd.print("Sunrise:   ");
+    lcd.print(floor(sun->rise/60));
+    lcd.setCursor(12,2);
+    lcd.print(":");
+    lcd.print(sun->rise%60);
+
+    // Sunset time
+    lcd.setCursor(0,3);
+    lcd.print("Sunset :  ");
+    lcd.print(floor(sun->set/60));
+    lcd.setCursor(12,3);
+    lcd.print(":");
+    lcd.print(sun->set%60);
+  }
+  else{
+    if(lcd_switch == 0 || switch_case_sum != waterfall->switch_case + uv->switch_case + mist->switch_case ){
+      lcd.clear();
+      lcd_switch = 1;
+    }
+
+    lcd.setCursor(0,0);
+    lcd.print("Waterfall: ");
+    lcd.print(switch_status[waterfall->switch_case]);
+
+    lcd.setCursor(0,1);
+    lcd.print("UV Light : ");
+    lcd.print(switch_status[uv->switch_case]);
+    
+    lcd.setCursor(0,2);
+    lcd.print("Mist     : ");
+    lcd.print(switch_status[mist->switch_case]);
+
+    switch_case_sum = waterfall->switch_case + uv->switch_case + mist->switch_case ;
   }
 }

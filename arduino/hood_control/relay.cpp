@@ -23,6 +23,7 @@ void pin_setup(){
   
     digitalWrite(r_array[ii]->relay_pin, HIGH);  
   }
+  pinMode(lcd_mode, INPUT); //lcd print mode 1 or 2
 }
 
 // Checks state of switches
@@ -51,8 +52,8 @@ void switch_state(int relay_ID) {
 
   // check if switch state has changed
   if (r->switch_case != _switch_cases[relay_ID]) {
-    debugprint(switch_status[r->switch_case]);
-    debugprintln(switch_label[relay_ID]);
+    Serial.print(switch_status[r->switch_case]);
+    Serial.println(switch_label[relay_ID]);
     _switch_cases[relay_ID] = r->switch_case;
   }
 }
