@@ -34,7 +34,7 @@ static const char* switch_label[] = {"Waterfall","UV Light","Mist"};
 static const int lcd_mode = 13;
 
 // Other constants
-static const int mist_length = 15; //in seconds
+static const int mist_length = 15000; //in mseconds
 static volatile bool morning_misted = false;
 static volatile bool evening_misted = false;
 static volatile int lcd_switch = 0;

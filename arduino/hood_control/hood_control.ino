@@ -43,7 +43,11 @@ void loop() {
     debugprintln("Enjoy the new day!");
     debugprint("It is now ");
     print_time();
-    
+
+    // screen would go funky after midnight I think, so  hopfully this will help
+    lcd.clear();
+    delay(100);
+
     sun->day_of_year = days_in_month[now.month()-1] + now.day();
     sun->rise = A[0]*sin(B*(sun->day_of_year - C[0]))+D[0];
     sun->set = A[1]*sin(B*(sun->day_of_year - C[1]))+D[1];
@@ -62,7 +66,7 @@ void loop() {
   }
   
   lcd_print();
-  delay(50); // delay for switch debouncing and to see lcd
+  delay(100); // delay for switch debouncing and to see lcd
 }
 
 //================================ Functions ==========================================
@@ -122,6 +126,12 @@ void auto_mode(int relay_ID, int relay_pin) {
     // ---------WATERFALL AUTO MODE---------
     case 0:
       debugprintln("WATERFALL AUTO CASE ACTIVATED");
+      if (sun->current_minutes > sun->rise && sun->current_minutes < sun->set){
+        digitalWrite(relay_pin, LOW); //active low relays
+      }
+      else {
+        digitalWrite(relay_pin, HIGH);
+      }
       break;
       
     // ------------UV AUTO MODE-------------
